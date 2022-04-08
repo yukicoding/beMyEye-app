@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider } from 'react-redux';
+import store from './app/store/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,12 +36,14 @@ function DetailsScreen({ navigation }: any) {
 export default function App() {
   const [number, setNumber] = useState<string>('0');
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen}></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen}></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
