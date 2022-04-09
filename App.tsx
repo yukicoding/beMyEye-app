@@ -6,42 +6,27 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
 import store from './app/store/index';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './app/screens/HomeScreens';
+import DetailsScreen from './app/screens/DetailsScreen';
+import LoginScreen from './app/screens/LoginScreen';
+const Tab = createBottomTabNavigator();
 
-const Stack = createNativeStackNavigator();
-
-function HomeScreen({ navigation }: any) {
+function MyTabs() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Details')}
-        title="click"
-      ></Button>
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="登录" component={LoginScreen} />
+      <Tab.Screen name="首页" component={HomeScreen} />
+      <Tab.Screen name="个人中心" component={DetailsScreen} />
+    </Tab.Navigator>
   );
 }
-
-function DetailsScreen({ navigation }: any) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen1</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-    </View>
-  );
-}
-
 export default function App() {
   const [number, setNumber] = useState<string>('0');
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen}></Stack.Screen>
-        </Stack.Navigator>
+        <MyTabs />
       </NavigationContainer>
     </Provider>
   );
