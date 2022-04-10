@@ -1,9 +1,30 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+
 import { View, TextInput, StyleSheet, Text, Button } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import Constants from 'expo-constants';
 
+import { getInfo } from '../utils/request/service/getInfo';
+/**
+ *
+ *  Redux tools
+ */
+
+import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
+import { descrease, increase } from '../store/slices/countSlice';
+
+interface RootState {
+  count: {
+    value: number;
+  };
+}
+
 export default function LoginScreen({ navigation }: any) {
+  useEffect(() => {
+    getInfo();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -11,10 +32,15 @@ export default function LoginScreen({ navigation }: any) {
     control,
   } = useForm();
 
-  const onSubmit = (data: any) => console.log(data);
-
+  const onSubmit = (data: any) => {
+    console.log(data);
+    dispatch(increase({ value: data.addCount }));
+  };
+  const count = useSelector((state: RootState) => state.count.value);
+  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
+      <Text style={styles.label}>count:{count}</Text>
       <Text style={styles.label}>userName</Text>
       <Controller
         control={control}
@@ -26,7 +52,7 @@ export default function LoginScreen({ navigation }: any) {
             value={value}
           />
         )}
-        name="userName"
+        name="addCount"
         rules={{ required: true }}
       />
       <Text style={styles.label}>password</Text>
@@ -40,8 +66,7 @@ export default function LoginScreen({ navigation }: any) {
             value={value}
           />
         )}
-        name="password"
-        rules={{ required: true }}
+        name="descreaseCount"
       />
 
       <View style={styles.button}>
