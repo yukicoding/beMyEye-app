@@ -15,14 +15,13 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="登录" component={LoginScreen} />
-      <Tab.Screen name="首页" component={HomeScreen} />
-      <Tab.Screen name="个人中心" component={DetailsScreen} />
+      <Tab.Screen name="Login" component={LoginScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="My" component={DetailsScreen} />
     </Tab.Navigator>
   );
 }
 export default function App() {
-  const [number, setNumber] = useState<string>('0');
   return (
     <Provider store={store}>
       <NavigationContainer>
