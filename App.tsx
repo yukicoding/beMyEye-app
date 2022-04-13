@@ -12,20 +12,26 @@ import DetailsScreen from './app/screens/DetailsScreen';
 import LoginScreen from './app/screens/LoginScreen';
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackScreen() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Login" component={LoginScreen} />
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="My" component={DetailsScreen} />
-    </Tab.Navigator>
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Details" component={DetailsScreen} />
+    </HomeStack.Navigator>
   );
 }
+
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <MyTabs />
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
+          <Tab.Screen name="Login" component={LoginScreen} />
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="My" component={DetailsScreen} />
+        </Tab.Navigator>
       </NavigationContainer>
     </Provider>
   );
