@@ -7,14 +7,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
 import GeenButton from '../components/GeenButton';
 export default function HomeScreen({ navigation }: any) {
-  const wxLogin = () => {
-    navigation.navigate('Details');
-  };
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <GeenButton
         onPress={() => navigation.navigate('Details')}
-        title="微信登陆1"
+        title="微信登陆"
       ></GeenButton>
     </View>
   );
