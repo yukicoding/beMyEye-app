@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 export default function DetailsScreen({ navigation }: any) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen1</Text>
+      <Text>Details Screen12</Text>
       {/* <Button
         title="Go to Details... again"
         onPress={() => navigation.push('Details')}
