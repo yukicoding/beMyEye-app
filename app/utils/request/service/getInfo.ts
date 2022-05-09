@@ -2,7 +2,7 @@ import request from '../../request';
 
 export async function getInfo(params?: any) {
   return request({
-    url: '/mock/837583/getInfo',
+    url: 'http://localhost:8082/user',
     method: 'GET',
     data: params,
     interceptors: {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   View,
@@ -14,6 +14,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Constants from 'expo-constants';
 
 import { getInfo } from '../utils/request/service/getInfo';
+import request from '../utils/request';
 /**
  *
  *  Redux tools
@@ -29,8 +30,13 @@ interface RootState {
 }
 
 export default function LoginScreen({ navigation }: any) {
+  const [list, setList] = useState<any>([]);
   useEffect(() => {
-    getInfo();
+    async function fetchInfo() {
+      const result = await getInfo();
+      setList(result);
+    }
+    fetchInfo();
   }, []);
 
   const {
@@ -78,6 +84,15 @@ export default function LoginScreen({ navigation }: any) {
           <Text style={styles.appButtonText}>{'我需要帮助'}</Text>
         </TouchableOpacity>
       </View>
+      {list.map((item: any) => {
+        return (
+          <View>
+            <View>小名{item.userName}</View>
+            <View>密码：{item.password}</View>
+            <View>小名：{item.nickName}</View>
+          </View>
+        );
+      })}
     </View>
   );
 }
